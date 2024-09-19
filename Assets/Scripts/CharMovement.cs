@@ -28,12 +28,25 @@ namespace BASA
         {
             isOnGround = Physics.CheckSphere(checkGround.position, radiousSphere, groundMask);
 
+            if (isOnGround && speedFall.y < 0)
+            {
+                speedFall.y = -2f;
+            }
+
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
             Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
             controller.Move(move * speed * Time.deltaTime);
+
+            if (Input.GetButtonDown("Jump") && isOnGround)
+            {
+                speedFall.y = Mathf.Sqrt(heightJump * -2f * gravity);
+            }
+
+            speedFall.y += gravity * Time.deltaTime;
+            controller.Move(speedFall * Time.deltaTime);
         }
 
         void OnDrawGizmosSelected()
