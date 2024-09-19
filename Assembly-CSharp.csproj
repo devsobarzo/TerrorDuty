@@ -65,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/CharMovement.cs" />
+    <Compile Include="Assets/Scripts/Breathing.cs" />
+    <Compile Include="Assets/Scripts/HeadMovement.cs" />
+    <Compile Include="Assets/Scripts/CameraRotation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
