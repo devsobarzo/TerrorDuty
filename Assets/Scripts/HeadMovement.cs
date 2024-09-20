@@ -15,6 +15,16 @@ public class HeadMovement : MonoBehaviour
     float vertical;
     Vector3 savePosition;
 
+    AudioSource audioSource;
+    public AudioClip[] audioClip;
+    public int indexSteps;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        indexSteps = 0;
+    }
+
     void Update()
     {
         cutWave = 0.0f;
@@ -52,5 +62,21 @@ public class HeadMovement : MonoBehaviour
         }
 
         transform.localPosition = savePosition;
+
+        SoundsSteps();
+    }
+
+    void SoundsSteps()
+    {
+        if (cutWave <= -0.95f && !audioSource.isPlaying)
+        {
+            audioSource.clip = audioClip[indexSteps];
+            audioSource.Play();
+            indexSteps++;
+            if (indexSteps >= 4)
+            {
+                indexSteps = 0;
+            }
+        }
     }
 }
