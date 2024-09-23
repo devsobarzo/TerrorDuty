@@ -21,7 +21,6 @@ namespace BASA
                 if (Physics.SphereCast(transform.position, 0.1f, transform.TransformDirection(Vector3.forward), out hit, 5))
                 {
                     distanceTarget = hit.distance;
-                    print(hit.transform.gameObject.name);
 
                     if (hit.transform.gameObject.tag == "objLift")
                     {
