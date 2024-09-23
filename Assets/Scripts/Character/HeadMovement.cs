@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BASA;
 
 public class HeadMovement : MonoBehaviour
 {
@@ -19,8 +20,11 @@ public class HeadMovement : MonoBehaviour
     public AudioClip[] audioClip;
     public int indexSteps;
 
+    CharMovement scriptMove;
+
     void Start()
     {
+        scriptMove = GetComponentInParent<CharMovement>();
         audioSource = GetComponent<AudioSource>();
         indexSteps = 0;
     }
@@ -64,11 +68,12 @@ public class HeadMovement : MonoBehaviour
         transform.localPosition = savePosition;
 
         SoundsSteps();
+        UpdateHead();
     }
 
     void SoundsSteps()
     {
-        if (cutWave <= -0.95f && !audioSource.isPlaying)
+        if (cutWave <= -0.95f && !audioSource.isPlaying && scriptMove.isOnGround)
         {
             audioSource.clip = audioClip[indexSteps];
             audioSource.Play();
@@ -77,6 +82,25 @@ public class HeadMovement : MonoBehaviour
             {
                 indexSteps = 0;
             }
+        }
+    }
+
+    void UpdateHead()
+    {
+        if (scriptMove.isRunning)
+        {
+            speed = 0.25f;
+            force = 0.25f;
+        }
+        else if (scriptMove.isBend)
+        {
+            speed = 0.15f;
+            force = 0.11f;
+        }
+        else
+        {
+            speed = 0.18f;
+            force = 0.15f;
         }
     }
 }
