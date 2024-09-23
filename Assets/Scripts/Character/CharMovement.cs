@@ -6,18 +6,22 @@ namespace BASA
 {
     public class CharMovement : MonoBehaviour
     {
+
+        [Header("Character's setup")]
         public CharacterController controller;
         public float speed = 6f;
         public float heightJump = 3f;
         public float gravity = -20f;
+        public bool isRunning;
 
+        [Header("Checks ground")]
         public Transform checkGround;
         public float radiousSphere = 0.4f;
         public LayerMask groundMask;
         public bool isOnGround;
-
         Vector3 speedFall;
 
+        [Header("Checks Bend")]
         public Transform cameraTransform;
         public bool isBend;
         public bool upBlocked;
@@ -25,10 +29,17 @@ namespace BASA
         float speedCurrent = 1f;
         RaycastHit hit;
 
-        public bool isRunning;
+        [Header("Character's status")]
+        public float hp = 100;
+        public float stamina = 100;
+        public bool tired;
+        public Breathing scriptBreath;
+
+
 
         void Start()
         {
+            tired = false;
             isRunning = false;
             controller = GetComponent<CharacterController>();
             isBend = false;
@@ -41,6 +52,7 @@ namespace BASA
             Checks();
             MovementBends();
             Inputs();
+            ConditionPlayer();
 
         }
 
@@ -89,14 +101,18 @@ namespace BASA
 
         void Inputs()
         {
-            if (Input.GetKey(KeyCode.LeftShift) && isOnGround && !isBend)
+            if (Input.GetKey(KeyCode.LeftShift) && isOnGround && !isBend && !tired)
             {
                 isRunning = true;
                 speed = 9;
+                stamina -= 0.3f;
+                stamina = Mathf.Clamp(stamina, 0, 100);
             }
             else
             {
                 isRunning = false;
+                stamina += 0.1f;
+                stamina = Mathf.Clamp(stamina, 0, 100);
             }
 
             if (Input.GetButtonDown("Jump") && isOnGround)
@@ -139,6 +155,20 @@ namespace BASA
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(checkGround.position, radiousSphere);
+        }
+
+        void ConditionPlayer()
+        {
+            if (stamina == 0)
+            {
+                tired = true;
+                scriptBreath.forceBreath = 5;
+            }
+
+            if (stamina > 20)
+            {
+                tired = false;
+            }
         }
     }
 }

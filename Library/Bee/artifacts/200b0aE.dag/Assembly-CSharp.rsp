@@ -363,6 +363,7 @@
 "Assets/Scripts/Character/CharMovement.cs"
 "Assets/Scripts/Character/HeadMovement.cs"
 "Assets/Scripts/Effects/DestroyEffects.cs"
+"Assets/Scripts/Manager/UIManager.cs"
 "Assets/Scripts/Objets/OnMouse.cs"
 "Assets/Scripts/Raycast/ActionsRaycast.cs"
 "Assets/Scripts/Raycast/RaycastScript.cs"
