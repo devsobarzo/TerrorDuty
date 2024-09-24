@@ -24,8 +24,10 @@ public class Glock : MonoBehaviour
     UIManager uiScript;
 
     public GameObject posUI;
-
+    WeaponMovement weaponMoveScript;
     public bool automatic;
+
+    public float randomNumScope;
 
 
     void Start()
@@ -35,6 +37,7 @@ public class Glock : MonoBehaviour
         anim = GetComponent<Animator>();
         audioGun = GetComponent<AudioSource>();
         uiScript = GameObject.FindWithTag("uiManager").GetComponent<UIManager>();
+        weaponMoveScript = GetComponentInParent<WeaponMovement>();
     }
 
 
@@ -93,7 +96,24 @@ public class Glock : MonoBehaviour
             magazine--;
             bullets = 17;
         }
-
+        if (Input.GetButton("Fire2"))
+        {
+            anim.SetBool("point", true);
+            posUI.transform.localPosition = new Vector3(0, 0.08f, 0);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 45, Time.deltaTime * 10);
+            uiScript.scope.gameObject.SetActive(false);
+            weaponMoveScript.value = 0.01f;
+            randomNumScope = 0f;
+        }
+        else
+        {
+            anim.SetBool("point", false);
+            posUI.transform.localPosition = new Vector3(0.16f, 0.02f, 0);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, Time.deltaTime * 10);
+            uiScript.scope.gameObject.SetActive(true);
+            weaponMoveScript.value = 0.1f;
+            randomNumScope = 0.05f;
+        }
     }
 
     IEnumerator Shooting()
@@ -107,8 +127,8 @@ public class Glock : MonoBehaviour
         GameObject effectShootObj = Instantiate(shootEffects, posEffShoot.transform.position, posEffShoot.transform.rotation);
         effectShootObj.transform.parent = posEffShoot.transform;
 
-        if (Physics.Raycast(new Vector3(ray.origin.x + Random.Range(-0.05f, 0.05f),
-        ray.origin.y + Random.Range(-0.05f, 0.05f), ray.origin.z), Camera.main.transform.forward, out hit))
+        if (Physics.Raycast(new Vector3(ray.origin.x + Random.Range(-randomNumScope, randomNumScope),
+        ray.origin.y + Random.Range(-randomNumScope, randomNumScope), ray.origin.z), Camera.main.transform.forward, out hit))
         {
             InstanceEffects();
 

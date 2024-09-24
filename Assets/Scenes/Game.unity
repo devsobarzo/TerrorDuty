@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1888917cdab8042efa568a1d508eed02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0.1
+  value: 0.01
   softlyValue: 6
   valueMax: 0.6
 --- !u!1 &785885092
@@ -7543,6 +7543,7 @@ MonoBehaviour:
   spriteKindShoot:
   - {fileID: 21300000, guid: a70f33028c84b4c9bb82090f06bad0a3, type: 3}
   - {fileID: 21300000, guid: e4e9684ea568142d39df5b6769f636e2, type: 3}
+  scope: {fileID: 1691767229}
 --- !u!1 &1691767227
 GameObject:
   m_ObjectHideFlags: 0
@@ -7555,7 +7556,7 @@ GameObject:
   - component: {fileID: 1691767230}
   - component: {fileID: 1691767229}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
