@@ -13,6 +13,9 @@ namespace BASA
         public float heightJump = 3f;
         public float gravity = -20f;
         public bool isRunning;
+        public AudioClip[] sounds;
+        AudioSource sound;
+        bool onScene;
 
         [Header("Checks ground")]
         public Transform checkGround;
@@ -44,6 +47,8 @@ namespace BASA
             controller = GetComponent<CharacterController>();
             isBend = false;
             cameraTransform = Camera.main.transform;
+            sound = GetComponent<AudioSource>();
+            onScene = false;
         }
 
 
@@ -53,8 +58,23 @@ namespace BASA
             MovementBends();
             Inputs();
             ConditionPlayer();
-
+            Sounds();
         }
+
+        void Sounds()
+        {
+            if (!isOnGround)
+            {
+                onScene = true;
+            }
+            if (isOnGround && onScene)
+            {
+                onScene = false;
+                sound.clip = sounds[1];
+                sound.Play();
+            }
+        }
+
 
         void Checks()
         {
@@ -118,6 +138,8 @@ namespace BASA
             if (Input.GetButtonDown("Jump") && isOnGround)
             {
                 speedFall.y = Mathf.Sqrt(heightJump * -2f * gravity);
+                sound.clip = sounds[0];
+                sound.Play();
             }
 
             if (Input.GetKeyDown(KeyCode.LeftControl))
