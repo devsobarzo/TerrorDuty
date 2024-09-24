@@ -548,6 +548,13 @@ MonoBehaviour:
   posEffShoot: {fileID: 114814788}
   bulletWay: {fileID: 1468438984}
   audioGun: {fileID: 0}
+  gunsSounds:
+  - {fileID: 8300000, guid: d3f562ac4323a413da1a0ecd285f822e, type: 3}
+  - {fileID: 8300000, guid: 9524ee2178be547d0aaaa5b97c341a89, type: 3}
+  - {fileID: 8300000, guid: e53de97a3ebfd43b3b4a35d988dc22c7, type: 3}
+  - {fileID: 8300000, guid: 956c3ad2c9dfe44ed86d0141d659dec4, type: 3}
+  magazine: 3
+  bullets: 17
 --- !u!82 &498003011
 AudioSource:
   m_ObjectHideFlags: 0
@@ -558,7 +565,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2ed8301d6c39d4ae497d2cbcbfe93bf7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1

@@ -16,6 +16,10 @@ public class Glock : MonoBehaviour
     public GameObject posEffShoot;
     public ParticleSystem bulletWay;
     public AudioSource audioGun;
+    public AudioClip[] gunsSounds;
+
+    public int magazine = 3;
+    public int bullets = 17;
 
 
     void Start()
@@ -35,17 +39,32 @@ public class Glock : MonoBehaviour
 
         if (Input.GetButtonDown("Fire3"))
         {
-            if (!isShooting)
+            if (!isShooting && bullets > 0)
             {
+                bullets--;
+                audioGun.clip = gunsSounds[0];
                 audioGun.Play();
                 bulletWay.Play();
                 isShooting = true;
                 StartCoroutine(Shooting());
             }
+            else if (!isShooting && bullets == 0 && magazine > 0)
+            {
+                anim.Play("Recharge");
+                magazine--;
+                bullets = 17;
+            }
+            else if (bullets == 0 && magazine == 0)
+            {
+                audioGun.clip = gunsSounds[3];
+                audioGun.Play();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && magazine > 0 && bullets < 17)
         {
             anim.Play("Recharge");
+            magazine--;
+            bullets = 17;
         }
 
     }
@@ -88,5 +107,16 @@ public class Glock : MonoBehaviour
 
         GameObject holeObje = Instantiate(hole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
         holeObje.transform.parent = hit.transform;
+    }
+
+    void MagazineSounds()
+    {
+        audioGun.clip = gunsSounds[1];
+        audioGun.Play();
+    }
+    void SoundUp()
+    {
+        audioGun.clip = gunsSounds[2];
+        audioGun.Play();
     }
 }
