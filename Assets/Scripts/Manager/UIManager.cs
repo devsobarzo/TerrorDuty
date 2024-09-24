@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ namespace BASA
 
         public Slider sliderHP, sliderHistamina;
         public CharMovement scriptMove;
+        public TextMeshProUGUI bullets;
+        public Image kindShoot;
+        public Sprite[] sprite;
 
 
 

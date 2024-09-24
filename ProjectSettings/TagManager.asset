@@ -6,6 +6,7 @@ TagManager:
   tags:
   - objLift
   - objTake
+  - uiManager
   layers:
   - Default
   - TransparentFX

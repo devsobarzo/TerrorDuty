@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BASA;
 
 public class Glock : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class Glock : MonoBehaviour
 
     public int magazine = 3;
     public int bullets = 17;
+    UIManager uiScript;
+
+    public GameObject posUI;
 
 
     void Start()
@@ -27,11 +31,15 @@ public class Glock : MonoBehaviour
         isShooting = false;
         anim = GetComponent<Animator>();
         audioGun = GetComponent<AudioSource>();
+        uiScript = GameObject.FindWithTag("uiManager").GetComponent<UIManager>();
     }
 
 
     void Update()
     {
+        uiScript.bullets.transform.position = Camera.main.WorldToScreenPoint(posUI.transform.position);
+        uiScript.bullets.text = bullets.ToString() + "/" + magazine.ToString();
+
         if (anim.GetBool("actions"))
         {
             return;
