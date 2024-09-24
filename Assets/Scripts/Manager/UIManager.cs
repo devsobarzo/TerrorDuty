@@ -15,7 +15,7 @@ namespace BASA
         public TextMeshProUGUI bullets;
         public Image kindShoot;
         public Sprite[] spriteKindShoot;
-        public Image scope;
+        public RectTransform scope;
 
 
 

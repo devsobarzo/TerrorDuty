@@ -28,6 +28,7 @@ public class Glock : MonoBehaviour
     public bool automatic;
 
     public float randomNumScope;
+    public float scopeValue;
 
 
     void Start()
@@ -38,6 +39,7 @@ public class Glock : MonoBehaviour
         audioGun = GetComponent<AudioSource>();
         uiScript = GameObject.FindWithTag("uiManager").GetComponent<UIManager>();
         weaponMoveScript = GetComponentInParent<WeaponMovement>();
+        scopeValue = 300;
     }
 
 
@@ -46,11 +48,33 @@ public class Glock : MonoBehaviour
         uiScript.bullets.transform.position = Camera.main.WorldToScreenPoint(posUI.transform.position);
         uiScript.bullets.text = bullets.ToString() + "/" + magazine.ToString();
 
+        ChangeScope();
+
         if (anim.GetBool("actions"))
         {
             return;
         }
+        Automatic();
+        Shoot();
+        Reload();
+        Scope();
+    }
 
+    void ChangeScope()
+    {
+        if (isShooting)
+        {
+            scopeValue = Mathf.Lerp(scopeValue, 450, Time.deltaTime * 20);
+            uiScript.scope.sizeDelta = new Vector2(scopeValue, scopeValue);
+        }
+        else
+        {
+            scopeValue = Mathf.Lerp(scopeValue, 300, Time.deltaTime * 20);
+            uiScript.scope.sizeDelta = new Vector2(scopeValue, scopeValue);
+        }
+    }
+    void Automatic()
+    {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             audioGun.clip = gunsSounds[2];
@@ -66,7 +90,10 @@ public class Glock : MonoBehaviour
                 uiScript.kindShoot.sprite = uiScript.spriteKindShoot[0];
             }
         }
+    }
 
+    void Shoot()
+    {
         if (Input.GetButtonDown("Fire3") || automatic ? Input.GetButton("Fire3") : false)
         {
             if (!isShooting && bullets > 0)
@@ -90,12 +117,20 @@ public class Glock : MonoBehaviour
                 audioGun.Play();
             }
         }
+    }
+
+    void Reload()
+    {
         if (Input.GetKeyDown(KeyCode.R) && magazine > 0 && bullets < 17)
         {
             anim.Play("Recharge");
             magazine--;
             bullets = 17;
         }
+    }
+
+    void Scope()
+    {
         if (Input.GetButton("Fire2"))
         {
             anim.SetBool("point", true);
