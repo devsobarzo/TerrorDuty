@@ -25,9 +25,12 @@ public class Glock : MonoBehaviour
 
     public GameObject posUI;
 
+    public bool automatic;
+
 
     void Start()
     {
+        automatic = false;
         isShooting = false;
         anim = GetComponent<Animator>();
         audioGun = GetComponent<AudioSource>();
@@ -45,7 +48,23 @@ public class Glock : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            audioGun.clip = gunsSounds[2];
+            audioGun.Play();
+            automatic = !automatic;
+
+            if (automatic)
+            {
+                uiScript.kindShoot.sprite = uiScript.spriteKindShoot[1];
+            }
+            else
+            {
+                uiScript.kindShoot.sprite = uiScript.spriteKindShoot[0];
+            }
+        }
+
+        if (Input.GetButtonDown("Fire3") || automatic ? Input.GetButton("Fire3") : false)
         {
             if (!isShooting && bullets > 0)
             {

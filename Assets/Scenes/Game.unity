@@ -559,6 +559,7 @@ MonoBehaviour:
   magazine: 3
   bullets: 17
   posUI: {fileID: 1436746495}
+  automatic: 0
 --- !u!82 &498003011
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2046,6 +2047,7 @@ GameObject:
   - component: {fileID: 1290286487}
   - component: {fileID: 1290286489}
   - component: {fileID: 1290286488}
+  - component: {fileID: 1290286490}
   m_Layer: 5
   m_Name: KindShootImg
   m_TagString: Untagged
@@ -2079,13 +2081,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290286486}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.7529412, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2110,6 +2112,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290286486}
   m_CullTransparentMesh: 1
+--- !u!114 &1290286490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290286486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1436746495
 GameObject:
   m_ObjectHideFlags: 0
@@ -7075,7 +7092,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554318647}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -7097,9 +7114,9 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281973452
-  m_fontColor: {r: 0.8018868, g: 0.7300704, b: 0.22316661, a: 1}
-  m_enableVertexGradient: 1
+    rgba: 4278239224
+  m_fontColor: {r: 0.9716981, g: 0.75068444, b: 0, a: 1}
+  m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
     topLeft: {r: 0.7264151, g: 0.72377694, b: 0.3186632, a: 1}
@@ -7423,7 +7440,7 @@ MonoBehaviour:
   scriptMove: {fileID: 0}
   bullets: {fileID: 1554318649}
   kindShoot: {fileID: 1290286488}
-  sprite:
+  spriteKindShoot:
   - {fileID: 21300000, guid: a70f33028c84b4c9bb82090f06bad0a3, type: 3}
   - {fileID: 21300000, guid: e4e9684ea568142d39df5b6769f636e2, type: 3}
 --- !u!1 &1691767227
