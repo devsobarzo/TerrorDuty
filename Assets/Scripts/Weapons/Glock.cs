@@ -14,12 +14,15 @@ public class Glock : MonoBehaviour
     public GameObject smoke;
     public GameObject shootEffects;
     public GameObject posEffShoot;
+    public ParticleSystem bulletWay;
+    public AudioSource audioGun;
 
 
     void Start()
     {
         isShooting = false;
         anim = GetComponent<Animator>();
+        audioGun = GetComponent<AudioSource>();
     }
 
 
@@ -29,10 +32,13 @@ public class Glock : MonoBehaviour
         {
             if (!isShooting)
             {
+                audioGun.Play();
+                bulletWay.Play();
                 isShooting = true;
                 StartCoroutine(Shooting());
             }
         }
+
 
     }
 
