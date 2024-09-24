@@ -28,6 +28,11 @@ public class Glock : MonoBehaviour
 
     void Update()
     {
+        if (anim.GetBool("actions"))
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Fire3"))
         {
             if (!isShooting)
@@ -38,7 +43,10 @@ public class Glock : MonoBehaviour
                 StartCoroutine(Shooting());
             }
         }
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            anim.Play("Recharge");
+        }
 
     }
 

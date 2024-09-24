@@ -358,6 +358,7 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"/Users/rober/Applications/2022.3.47f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/Users/rober/Applications/2022.3.47f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Scripts/Animations/CheckActions.cs"
 "Assets/Scripts/Character/Breathing.cs"
 "Assets/Scripts/Character/CameraRotation.cs"
 "Assets/Scripts/Character/CharMovement.cs"
