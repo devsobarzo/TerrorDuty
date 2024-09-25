@@ -88,15 +88,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.2
+      value: 29.86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1255,8 +1255,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 122
+  m_CollisionDetection: 1
 --- !u!136 &3728540314349419392
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1323,7 +1323,8 @@ MonoBehaviour:
   hp: 30
   isDead: 0
   angry: 0
-  renderer: {fileID: 0}
+  render: {fileID: 0}
+  invincible: 0
   objSlide: {fileID: 6585715772634565349}
 --- !u!114 &3980910499200574457
 MonoBehaviour:

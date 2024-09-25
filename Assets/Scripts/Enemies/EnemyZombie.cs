@@ -16,7 +16,8 @@ public class EnemyZombie : MonoBehaviour
     public int hp = 100;
     public bool isDead;
     public bool angry;
-    public Renderer renderer;
+    public Renderer render;
+    public bool invincible;
 
     Ragdoll ragScript;
 
@@ -28,7 +29,8 @@ public class EnemyZombie : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         ragScript = GetComponent<Ragdoll>();
-        renderer = GetComponentInChildren<Renderer>();
+        render = GetComponentInChildren<Renderer>();
+        invincible = false;
         isDead = false;
         ragScript.RagdollDisabled();
     }
@@ -43,17 +45,20 @@ public class EnemyZombie : MonoBehaviour
             LookingAtPlayer();
             LookAtPlayer();
 
-            if (hp <= 20)
+            if (hp <= 20 && !angry)
             {
                 angry = true;
-                renderer.material.color = Color.red;
+                anim.ResetTrigger("recieveShoot");
+                StopMove();
+                anim.CrossFade("Scream", 0.2f);
+                render.material.color = Color.red;
                 velocity = 8;
             }
 
 
             if (hp <= 0 && !isDead)
             {
-                renderer.material.color = Color.white;
+                render.material.color = Color.white;
                 objSlide.SetActive(false);
                 isDead = true;
                 StopMove();
@@ -129,15 +134,18 @@ public class EnemyZombie : MonoBehaviour
 
         if (n % 2 == 0 && !angry)
         {
+            anim.SetTrigger("recieveShoot");
             StopMove();
         }
-        hp -= damage;
+        if (!invincible)
+        {
+            hp -= damage;
+        }
     }
 
     public void StopMove()
     {
         navMesh.isStopped = true;
-        anim.SetTrigger("recieveShoot");
         anim.SetBool("canMove", false);
         CheckRigidIn();
     }
@@ -145,5 +153,16 @@ public class EnemyZombie : MonoBehaviour
     public void PlayerDamage()
     {
         player.GetComponent<CharMovement>().hp -= 5;
+    }
+
+    public void BeInvincible()
+    {
+        invincible = true;
+    }
+
+    public void NotInvincible()
+    {
+        invincible = false;
+        anim.speed = 2;
     }
 }
