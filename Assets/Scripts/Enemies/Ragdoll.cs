@@ -42,6 +42,7 @@ public class Ragdoll : MonoBehaviour
         {
             ragRigis[i].isKinematic = false;
             ragColliders[i].enabled = true;
+            ragRigis[i].transform.gameObject.layer = 8;
         }
         rigid.isKinematic = true;
         GetComponent<CapsuleCollider>().enabled = false;
