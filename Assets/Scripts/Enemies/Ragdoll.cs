@@ -31,7 +31,7 @@ public class Ragdoll : MonoBehaviour
             rigs[i].isKinematic = true;
 
             Collider col = rigs[i].gameObject.GetComponent<Collider>();
-            col.isTrigger = true;
+            col.enabled = false;
             ragColliders.Add(col);
         }
     }
@@ -41,7 +41,7 @@ public class Ragdoll : MonoBehaviour
         for (int i = 0; i < ragRigis.Count; i++)
         {
             ragRigis[i].isKinematic = false;
-            ragColliders[i].isTrigger = false;
+            ragColliders[i].enabled = true;
         }
         rigid.isKinematic = true;
         GetComponent<CapsuleCollider>().enabled = false;

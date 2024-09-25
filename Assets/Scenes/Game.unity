@@ -1038,6 +1038,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   hp: 30
   isDead: 0
+  angry: 0
+  renderer: {fileID: 0}
   objSlide: {fileID: 1072963122}
 --- !u!195 &389874295
 NavMeshAgent:
@@ -2548,7 +2550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b8351db6e5db645288303e87a8b3be30, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b8351db6e5db645288303e87a8b3be30, type: 3}
       propertyPath: m_TagString
@@ -3338,6 +3340,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   hp: 30
   isDead: 0
+  angry: 0
+  renderer: {fileID: 0}
   objSlide: {fileID: 1908394137}
 --- !u!114 &974640128
 MonoBehaviour:
@@ -11659,7 +11663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0531b74c5ae0140719cec8557db7c48e, type: 3}
       propertyPath: m_TagString

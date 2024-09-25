@@ -15,6 +15,8 @@ public class EnemyZombie : MonoBehaviour
     public Animator anim;
     public int hp = 100;
     public bool isDead;
+    public bool angry;
+    public Renderer renderer;
 
     Ragdoll ragScript;
 
@@ -26,6 +28,7 @@ public class EnemyZombie : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         ragScript = GetComponent<Ragdoll>();
+        renderer = GetComponentInChildren<Renderer>();
         isDead = false;
         ragScript.RagdollDisabled();
     }
@@ -40,8 +43,17 @@ public class EnemyZombie : MonoBehaviour
             LookingAtPlayer();
             LookAtPlayer();
 
+            if (hp <= 20)
+            {
+                angry = true;
+                renderer.material.color = Color.red;
+                velocity = 8;
+            }
+
+
             if (hp <= 0 && !isDead)
             {
+                renderer.material.color = Color.white;
                 objSlide.SetActive(false);
                 isDead = true;
                 StopMove();
@@ -112,7 +124,13 @@ public class EnemyZombie : MonoBehaviour
 
     public void TookDamage(int damage)
     {
-        StopMove();
+        int n;
+        n = Random.Range(0, 10);
+
+        if (n % 2 == 0 && !angry)
+        {
+            StopMove();
+        }
         hp -= damage;
     }
 
