@@ -30,16 +30,20 @@ public class EnemyZombie : MonoBehaviour
 
     void Update()
     {
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);
-        LookingAtPlayer();
-        LookAtPlayer();
-
-        if (hp <= 0 && !isDead)
+        if (!isDead)
         {
-            isDead = true;
-            StopMove();
-            ragScript.RagdollEnabled();
-            this.enabled = false;
+            playerDistance = Vector3.Distance(transform.position, player.transform.position);
+
+            LookingAtPlayer();
+            LookAtPlayer();
+
+            if (hp <= 0 && !isDead)
+            {
+                isDead = true;
+                StopMove();
+                navMesh.enabled = true;
+                ragScript.RagdollEnabled();
+            }
         }
     }
 
@@ -104,12 +108,15 @@ public class EnemyZombie : MonoBehaviour
 
     public void TookDamage(int damage)
     {
+        StopMove();
         hp -= damage;
     }
 
     public void StopMove()
     {
         navMesh.isStopped = true;
+        anim.SetTrigger("recieveShoot");
         anim.SetBool("canMove", false);
+        CheckRigidIn();
     }
 }

@@ -44,7 +44,7 @@ public class Ragdoll : MonoBehaviour
             ragColliders[i].isTrigger = false;
         }
         rigid.isKinematic = true;
-        GetComponent<CapsuleCollider>().isTrigger = true;
+        GetComponent<CapsuleCollider>().enabled = false;
         StartCoroutine("AnimationsEnd");
     }
 

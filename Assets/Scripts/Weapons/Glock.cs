@@ -169,10 +169,19 @@ public class Glock : MonoBehaviour
         {
             if (hit.transform.tag == "enemy")
             {
-                if (hit.transform.GetComponent<EnemyZombie>())
+                if (hit.rigidbody != null && hit.transform.GetComponentInParent<EnemyZombie>().isDead)
+                {
+                    AddForce(ray, 900);
+                }
+                else if (hit.transform.GetComponent<EnemyZombie>())
                 {
                     hit.transform.GetComponent<EnemyZombie>().TookDamage(15);
                 }
+                else if (hit.transform.GetComponentInParent<EnemyZombie>())
+                {
+                    hit.transform.GetComponentInParent<EnemyZombie>().TookDamage(15);
+                }
+
 
                 GameObject particleCreate = Instantiate(particleBlood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
                 particleCreate.transform.parent = hit.transform;
