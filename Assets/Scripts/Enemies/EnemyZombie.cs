@@ -17,6 +17,8 @@ public class EnemyZombie : MonoBehaviour
 
     Ragdoll ragScript;
 
+    public GameObject objSlide;
+
     void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
@@ -39,6 +41,7 @@ public class EnemyZombie : MonoBehaviour
 
             if (hp <= 0 && !isDead)
             {
+                objSlide.SetActive(false);
                 isDead = true;
                 StopMove();
                 navMesh.enabled = true;
