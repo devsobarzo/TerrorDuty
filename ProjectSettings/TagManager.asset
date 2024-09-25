@@ -7,6 +7,8 @@ TagManager:
   - objLift
   - objTake
   - uiManager
+  - HeadDisabled
+  - enemy
   layers:
   - Default
   - TransparentFX

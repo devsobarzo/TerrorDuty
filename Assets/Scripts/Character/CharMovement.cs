@@ -192,5 +192,12 @@ namespace BASA
                 tired = false;
             }
         }
+        void OnTriggerStay(Collider col)
+        {
+            if (col.gameObject.CompareTag("HeadDisabled"))
+            {
+                controller.SimpleMove(transform.forward * 1000 * Time.deltaTime);
+            }
+        }
     }
 }

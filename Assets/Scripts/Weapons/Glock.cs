@@ -15,6 +15,7 @@ public class Glock : MonoBehaviour
     public GameObject smoke;
     public GameObject shootEffects;
     public GameObject posEffShoot;
+    public GameObject particleBlood;
     public ParticleSystem bulletWay;
     public AudioSource audioGun;
     public AudioClip[] gunsSounds;
@@ -163,17 +164,25 @@ public class Glock : MonoBehaviour
         effectShootObj.transform.parent = posEffShoot.transform;
 
         if (Physics.Raycast(new Vector3(ray.origin.x + Random.Range(-randomNumScope, randomNumScope),
-        ray.origin.y + Random.Range(-randomNumScope, randomNumScope), ray.origin.z), Camera.main.transform.forward, out hit))
+        ray.origin.y + Random.Range(-randomNumScope, randomNumScope),
+        ray.origin.z), Camera.main.transform.forward, out hit))
         {
-            InstanceEffects();
-
-            if (hit.transform.tag == "objLift")
+            if (hit.transform.tag == "enemy")
             {
-                Vector3 dirBullet = ray.direction;
+                if (hit.transform.GetComponent<EnemyZombie>())
+                {
+                    hit.transform.GetComponent<EnemyZombie>().TookDamage(15);
+                }
+
+                GameObject particleCreate = Instantiate(particleBlood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                particleCreate.transform.parent = hit.transform;
+            }
+            else
+            {
+                InstanceEffects();
                 if (hit.rigidbody != null)
                 {
-                    hit.rigidbody.AddForceAtPosition(dirBullet * 500, hit.point);
-
+                    AddForce(ray, 400);
                 }
             }
         }
@@ -200,5 +209,11 @@ public class Glock : MonoBehaviour
     {
         audioGun.clip = gunsSounds[2];
         audioGun.Play();
+    }
+
+    void AddForce(Ray ray, float force)
+    {
+        Vector3 directionBullet = ray.direction;
+        hit.rigidbody.AddForceAtPosition(directionBullet * force, hit.point);
     }
 }
