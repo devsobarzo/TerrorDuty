@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BASA;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -121,5 +122,10 @@ public class EnemyZombie : MonoBehaviour
         anim.SetTrigger("recieveShoot");
         anim.SetBool("canMove", false);
         CheckRigidIn();
+    }
+
+    public void PlayerDamage()
+    {
+        player.GetComponent<CharMovement>().hp -= 5;
     }
 }
