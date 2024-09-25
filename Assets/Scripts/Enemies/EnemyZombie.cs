@@ -18,10 +18,10 @@ public class EnemyZombie : MonoBehaviour
     public bool angry;
     public Renderer render;
     public bool invincible;
-
     Ragdoll ragScript;
-
     public GameObject objSlide;
+    public AudioClip[] sounds;
+    public AudioSource soundEnemy;
 
     void Start()
     {
@@ -30,6 +30,7 @@ public class EnemyZombie : MonoBehaviour
         anim = GetComponent<Animator>();
         ragScript = GetComponent<Ragdoll>();
         render = GetComponentInChildren<Renderer>();
+        soundEnemy = GetComponent<AudioSource>();
         invincible = false;
         isDead = false;
         ragScript.RagdollDisabled();
@@ -58,6 +59,7 @@ public class EnemyZombie : MonoBehaviour
 
             if (hp <= 0 && !isDead)
             {
+                DiedSound();
                 render.material.color = Color.white;
                 objSlide.SetActive(false);
                 isDead = true;
@@ -165,4 +167,30 @@ public class EnemyZombie : MonoBehaviour
         invincible = false;
         anim.speed = 2;
     }
+
+    public void StepSounds()
+    {
+        soundEnemy.volume = 0.05f;
+        soundEnemy.PlayOneShot(sounds[0]);
+    }
+
+    public void PainSound()
+    {
+        soundEnemy.volume = 1f;
+        soundEnemy.clip = sounds[1];
+        soundEnemy.Play();
+    }
+
+    public void ScreamSound()
+    {
+        soundEnemy.clip = sounds[2];
+        soundEnemy.Play();
+    }
+    public void DiedSound()
+    {
+        soundEnemy.clip = sounds[3];
+        soundEnemy.Play();
+    }
+
+
 }
